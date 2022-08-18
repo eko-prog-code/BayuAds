@@ -73,7 +73,7 @@ const CardAntrian = () => {
       start={{x: 0, y: 0}}
       end={{x: 1, y: 0}}
       style={{borderRadius: 15, marginTop: 10}}
-      colors={['#DFF5FE', '#EDEEF0', '#DFF5FE']}>
+      colors={['#DFF5FE', '#DFF5FE', '#DFF5FE']}>
       {loading && <Loading />}
       <View
         style={{
@@ -81,7 +81,6 @@ const CardAntrian = () => {
           borderRadius: 15,
         }}>
         <HomeProfile />
-        <Text style={{color:'#1908DD', fontWeight: 'bold'}}>Hai...{profile?.fullName}</Text>
         <Text style={{color: '#000000'}}>Nomor Antrian Appoitment:</Text>
         <Text
           style={{

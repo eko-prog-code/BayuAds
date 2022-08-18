@@ -1,21 +1,21 @@
 import React, {Component, useCallback, useEffect, useState} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import TextTicker from 'react-native-text-ticker';
 import FIREBASE from '../../config/FIREBASE';
 
-const TextUser = props => {
-  const [textUser, setTextUser] = useState(null);
+const RunningTextWebview = props => {
+  const [runningText, setRunningText] = useState(null);
 
   useEffect(() => {
-    getTextUser();
+    getRunningText();
   }, []);
 
-  const getTextUser = () => {
+  const getRunningText = () => {
     FIREBASE.database()
-      .ref('text_user')
+      .ref('runningTextWebview')
       .once('value')
       .then(res => {
-        setTextUser(res?.val());
+        setRunningText(res?.val());
       })
       .catch(err => {
         console.error(err);
@@ -24,21 +24,25 @@ const TextUser = props => {
 
   return (
     <View style={styles.runningText}>
-      {textUser ? (
+      <Image
+        style={styles.runningTextLogo}
+        source={require('../../assets/megaphone.png')}
+      />
+      {runningText ? (
             <View style={{flex: 1}}>
               <TextTicker
                 style={{
                   fontSize: 16,
                   color: '#000000',
                   fontWeight: 'bold',
-                  marginBottom: 0,
+                  fontStyle: 'italic',
                   //width: Dimensions.get("screen").width - 40,
                 }}
-                duration={60000}
+                duration={20000}
                 loop
                 // bounce
                 repeatSpacer={50}>
-                {textUser}
+                {runningText}
               </TextTicker>
             </View>
           ) : null}
@@ -46,10 +50,18 @@ const TextUser = props => {
   )
 }
 
-export default TextUser
+export default RunningTextWebview
 
 const styles = StyleSheet.create({
   runningText: {
-    paddingTop: 20,
-  }
+    paddingHorizontal: 2,
+    marginTop: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  runningTextLogo: {
+    height: 44,
+    width: 44,
+    marginRight: 0,
+  },
 })

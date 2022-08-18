@@ -22,6 +22,7 @@ const HomeProfile = ({onPress}) => {
   return (
     <View>
       <Image source={profile.photo} style={styles.avatar} />
+      <Text style={styles.name}>{profile?.fullName}</Text>
     </View>
   );
 };
@@ -32,12 +33,12 @@ const styles = StyleSheet.create({
   container: {flexDirection: 'row', flex: 1},
   avatar: {width: 66, height: 66, borderRadius: 66 / 2, marginRight: 12},
   name: {
-    fontSize: 20,
     fontWeight: 'bold',
     fontFamily: fonts.primary[600],
-    color: '#F8C471',
+    color: '#1908DD',
     fontStyle: 'italic',
     textTransform: 'capitalize',
-    textAlign: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
   },
 });

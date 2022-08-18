@@ -7,6 +7,7 @@ import {
   Touchable,
   TouchableOpacity,
   View,
+  StatusBar,
 } from 'react-native';
 import {Button, Gap, Input} from '../..';
 import {colors, useFormSoul} from '../../../utils';
@@ -22,6 +23,7 @@ const ModalAddPenunjang = ({
 }) => {
   return (
     <Modal visible={visible} transparent>
+       <StatusBar barStyle="dark-content" backgroundColor={'rgba(0,0,0,0.5)'} hidden={false} />
       <View style={styles.modalContainer}>
         <View style={styles.container}>
           <TouchableOpacity
@@ -72,13 +74,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.loadingBackground,
   },
   container: {
-    backgroundColor: '#112340',
+    backgroundColor: '#F8F8F8',
     width: '100%',
     padding: 24,
+    borderRadius: 20,
   },
   headerText: {
     fontSize: 18,
-    color: colors.white,
+    color: colors.black,
     textAlign: 'center',
     paddingHorizontal: 20,
   },

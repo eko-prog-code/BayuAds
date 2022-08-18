@@ -27,6 +27,7 @@ import {colors} from '../../utils';
 import {Header, Input, VideoPlayer} from '../../components';
 import {useDispatch} from 'react-redux';
 import {YellowBox} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const Obat = ({navigation}) => {
   const [data, setData] = useState([]);
@@ -77,7 +78,7 @@ const Obat = ({navigation}) => {
   };
 
   const openKlinik = url => {
-    Linking.openURL('https://' + url);
+    navigation.navigate('WebviewPage', {link: 'https://' + url});
   };
 
   moment.updateLocale('id', localization);

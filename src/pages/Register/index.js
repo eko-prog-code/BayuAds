@@ -6,7 +6,7 @@ import {
   TextInput,
   ActivityIndicator,
   Text,
-  Image
+  Image,
 } from 'react-native';
 import IcEye from '../../assets/icons/eye.svg';
 import IcEyeSlash from '../../assets/icons/eye-slash.svg';
@@ -101,12 +101,12 @@ const Register = ({navigation}) => {
             onPressRight={() => setShowPassword(!showPassword)}
           />
           <Gap height={16} />
-          <Button title="(REGISTER)" textColor="white" onPress={onContinue} />
+          <Button title="DAFTAR" textColor="white" onPress={onContinue} />
 
           <Gap height={30} />
           <Button
             type="secondary"
-            title="Sudah punya Akun (LOGIN)"
+            title="Sudah punya Akun (MASUK)"
             onPress={() => navigation.replace('Login')}
           />
         </ScrollView>

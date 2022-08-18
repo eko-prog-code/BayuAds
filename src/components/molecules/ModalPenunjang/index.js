@@ -8,6 +8,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  StatusBar,
 } from 'react-native';
 import IcEye from '../../../assets/icons/eye.svg';
 import IcEyeSlash from '../../../assets/icons/eye-slash.svg';
@@ -37,6 +38,7 @@ const ModalPenunjang = ({visible, onSubmit, profile, onClose}) => {
 
   return (
     <Modal visible={visible} animationType="fade" transparent>
+     <StatusBar barStyle="dark-content" backgroundColor={'rgba(0,0,0,0.5)'} hidden={false} />
       <View style={styles.modalContainer}>
         <View style={styles.container}>
           <TouchableOpacity

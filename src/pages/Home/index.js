@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch} from 'react-redux';
-import {FloatingIcon, PopupPoint, Gap} from '../../components';
+import {FloatingIcon, PopupPoint, Gap, Link} from '../../components';
 import FIREBASE from '../../config/FIREBASE';
 import Carousel from '../Carousel';
 import Headline from '../Headline';
@@ -61,7 +61,8 @@ const Home = ({navigation}) => {
 
   return (
     <View style={styles.page}>
-      <StatusBar barStyle="dark-content" backgroundColor={"transparent"} translucent/>
+      <Gap height={30} />
+      <StatusBar barStyle="dark-content" backgroundColor={'#DFF5FE'} translucent/>
       <View style={styles.headerContainer}>
         <TouchableOpacity
           onPress={() => {
@@ -92,8 +93,14 @@ const Home = ({navigation}) => {
         <Voucher data={banner} />
         <Map />
         <Gap height={10} />
+        <Link
+          title="Software Engineer"
+          size={16}
+          align="center"
+          onPress={() => navigation.navigate('WebviewPage', {link: 'https://wa.me/+62895600394345'})}
+        />
         <Text style={styles.version}>Bayukarta Mobile App</Text>
-        <Text style={styles.version2}>Versi: 1</Text>
+        <Text style={styles.version2}>Versi: 5</Text>
         <Notif />
       </ScrollView>
       <FloatingIcon

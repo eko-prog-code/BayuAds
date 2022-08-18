@@ -1,9 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, Image, ImageBackground} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ImageBackground,
+  StatusBar,
+  Linking,
+} from 'react-native';
 import FIREBASE from '../../config/FIREBASE';
 import PushNotification from 'react-native-push-notification';
 import NotifService from '../../../NotifService';
 import handler from '../../../NotificationHandler';
+import {FloatingIcon, PopupPoint, Gap, Link} from '../../components';
 
 const Splash = ({navigation}) => {
   const [pushNotification, setPushNotification] = useState(false);
@@ -24,7 +33,7 @@ const Splash = ({navigation}) => {
         {
           navigation.replace('MainApp');
         }
-      }, 3000);
+      }, 4500);
       PushNotification.localNotification({
         channelId: 'bayukartamobile',
         message: ' Health_tech (RS Bayukarta Mobile Apps)', // (required)
@@ -36,9 +45,21 @@ const Splash = ({navigation}) => {
   }, [navigation]);
 
   return (
-    <ImageBackground
-      source={require('../../assets/ILopening.jpeg')}
-      style={styles.page}></ImageBackground>
+    <>
+      <ImageBackground
+        source={require('../../assets/ILopening.jpeg')}
+        style={styles.page}>
+        <StatusBar barStyle="dark-content" backgroundColor={"transparent"} translucent/>
+      </ImageBackground>
+      <Link
+        title="Software Engineer"
+        size={16}
+        position-="absolute"
+        bottom={20}
+        align="center"
+        onPress={() => Linking.openURL('https://wa.me/+62895600394345')}
+      />
+    </>
   );
 };
 

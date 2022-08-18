@@ -52,7 +52,7 @@ const Video = () => {
         contentContainerStyle={{alignItems: 'center', paddingVertical: 20}}
         showsVerticalScrollIndicator={false}>
           <Gap height={40} />
-        <Text style={{fontSize: 14, fontWeight: 'bold', textAlign: 'center', color: '#E5B654'}}>
+        <Text style={{fontSize: 14, fontWeight: 'bold', textAlign: 'center', color: '#000000'}}>
           {`Sampurasun ${profile?.fullName}\n(ini adalah list video: TeleMedicine milik Anda)\n(untuk memperoleh fasilitas TeleMedicine)\n(hubungi Information Center)`}
         </Text>
         {videoData?.map((item, index) => (
@@ -65,7 +65,7 @@ const Video = () => {
             key={index}>
             <Image source={{uri: item?.image}} style={styles.image} />
             <Gap height={16} />
-            <Text style={{textAlign: 'center', color: '#E5B654'}}>{item?.title}</Text>
+            <Text style={{textAlign: 'center', color: '#1908DD',}}>{item?.title}</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     flex: 1,
-    backgroundColor: '#112340',
+    backgroundColor: '#F8F8F8',
   },
   imageView: {
     marginVertical: 20,

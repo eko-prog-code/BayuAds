@@ -15,6 +15,7 @@ import Opsi from './Opsi';
 import Am from './Am';
 import New from './New';
 import Filter from './Filter';
+import WebviewPage from './WebviewPage';
 
 export {
   Home,
@@ -34,4 +35,5 @@ export {
   Am,
   New,
   Filter,
+  WebviewPage,
 };

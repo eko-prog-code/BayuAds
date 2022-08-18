@@ -228,7 +228,7 @@ const PenunjangUser = () => {
             label={'Cari foto sesuai judul'}
           />
           <FontAwesomeIcon
-            color={colors.white}
+            color={colors.black}
             style={{position: 'absolute', top: '58%', right: 32}}
             icon={faSearch}
           />
@@ -299,7 +299,7 @@ export default PenunjangUser;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#112340',
+    backgroundColor: '#F8F8F8',
   },
   scrollContainer: {
     alignItems: 'center',
@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 18,
-    color: 'white',
+    color: 'black',
     textAlign: 'center',
     paddingHorizontal: 20,
   },

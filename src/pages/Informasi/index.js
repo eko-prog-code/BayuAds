@@ -96,13 +96,13 @@ const Informasi = ({navigation}) => {
           <Text style={styles.news}>Bayukarta TeleVision Channel</Text>
           <Info />
         </View>
-        <FloatingIcon
+      </ScrollView>
+      <FloatingIcon
           onClose={() => setShowFloating(false)}
           onPress={() => navigation.navigate('New')}
           visible={showFloating}
           imageUri={floatingIconUrl}
         />
-      </ScrollView>
     </View>
   );
 };

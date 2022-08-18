@@ -2,5 +2,5 @@
     <string name="app_name">RS Bayukarta</string>
     <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true" translatable="false">DO_NOT_ASK_JAVASCRIPT</string>
     <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true" translatable="false">ALWAYS_SEND</string>
-     <string moduleConfig="true" name="CodePushDeploymentKey">1qU9qw6_McHqxQCOYRuNBxB6Ci2xPBB83oNdf</string>
+     <string moduleConfig="true" name="CodePushDeploymentKey">lmImxmiLiA0khLMd_zss--VkBDZltbTm_nHmo</string>
 </resources>

@@ -183,7 +183,7 @@ const Sukses = () => {
     <ImageBackground
       source={require('../../assets/ILprivacyBackground.png')}
       style={styles.container}>
-       <StatusBar barStyle="dark-content" backgroundColor={'rgba(0,0,0,0.5)'} hidden={false} />
+       <StatusBar barStyle="dark-content" backgroundColor={"#F8F8F8"} hidden={false} />
       {loading && <Loading />}
       <ScrollView
         contentContainerStyle={{
@@ -192,7 +192,7 @@ const Sukses = () => {
           paddingHorizontal: 20,
         }}
         showsVerticalScrollIndicator={false}>
-        <Gap height={40} />
+        <Gap height={60} />
         <HomeProfile profile={profile} />
         <Gap height={10} />
         {imageData?.map((item, index) => (

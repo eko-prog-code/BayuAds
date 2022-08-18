@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import FIREBASE from '../../config/FIREBASE';
-import {JadwalCard} from '../../components';
+import {JadwalCard, Gap} from '../../components';
 import {useDispatch} from 'react-redux';
 
 const Jadwal = props => {
@@ -51,6 +51,7 @@ const Jadwal = props => {
 
   return (
     <View style={styles.page}>
+       <Gap height={20} />
       <View style={styles.colom}>
         <Text style={styles.row}>CARI JADWAL PRAKTEK DOKTER</Text>
         <View style={styles.imageDok}>

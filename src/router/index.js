@@ -18,6 +18,7 @@ import {
   Am,
   New,
   Filter,
+  WebviewPage,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomTabNavigator} from '../components';
@@ -54,6 +55,11 @@ const Router = () => {
       <Stack.Screen
         name="Register"
         component={Register}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="WebviewPage"
+        component={WebviewPage}
         options={{headerShown: false}}
       />
       <Stack.Screen
