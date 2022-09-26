@@ -1,12 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, View, ActivityIndicator} from 'react-native';
 import {colors, fonts} from '../../../utils';
+import Lottie from 'lottie-react-native';
 
 const Loading = () => {
   return (
     <View style={styles.wrapper}>
-      <ActivityIndicator size="large" color={colors.primary} />
-      <Text style={styles.text}>Loading...</Text>
+       <Lottie style={{width: 300, height: 300}} source={require('./../../../assets/load.json')} autoPlay={true} loop={false} />
     </View>
   );
 };

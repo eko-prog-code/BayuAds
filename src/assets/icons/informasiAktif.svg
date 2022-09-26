@@ -1,5 +1,5 @@
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="24" height="24" fill="#2447F9"/>
+<rect width="24" height="24" rx="4" fill="#2447F9"/>
 <rect x="2" y="2" width="8" height="8" rx="2" fill="url(#paint0_linear_2001_27)"/>
 <rect x="2" y="14" width="8" height="8" rx="2" fill="url(#paint1_linear_2001_27)"/>
 <path d="M14 4C14 2.89543 14.8954 2 16 2H20C21.1046 2 22 2.89543 22 4V8C22 9.10457 21.1046 10 20 10H16C14.8954 10 14 9.10457 14 8V4Z" fill="url(#paint2_linear_2001_27)"/>

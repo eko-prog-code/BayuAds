@@ -7,12 +7,35 @@ import {
   Text,
   TouchableOpacity,
   View,
+  StatusBar,
 } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import ImageCropPicker from 'react-native-image-crop-picker';
-import {Gap, InputData} from '../../components';
 import FIREBASE from '../../config/FIREBASE';
 import {getData} from '../../utils';
+import moment from 'moment';
+import 'moment/locale/id';
+moment.locale('id');
+import {
+  colors,
+  isInTheFuture,
+  isInThePast,
+  showError,
+  storeData,
+  useForm,
+} from '../../utils';
+import {
+  InputData,
+  Button,
+  DatePicker,
+  Header,
+  Gap,
+  Input,
+  HeaderAm,
+  Picker,
+} from '../../components';
 
 export default class Am extends Component {
   constructor(props) {
@@ -27,13 +50,69 @@ export default class Am extends Component {
       klinik: '',
       dokter: '',
       tanggalKehadiran: '',
+      jamKehadiran: '',
+      showBirthDate: false,
+      showPresentDate: false,
+      showPresentClock: false,
+      openKlinik: false,
+      valueKlinik: null,
+      itemsKlinik: [],
+
+      openDokter: false,
+      valueDokter: null,
+      itemsDokter: [],
       photoForDB: '',
       photo: '',
     };
   }
 
+  getKlinik() {
+    FIREBASE.database()
+      .ref('klinik')
+      .once('value')
+      .then(res => {
+        const data = res.val();
+        const filteredData = [];
+
+        data.filter(
+          item =>
+            item !== undefined &&
+            filteredData.push({label: item.name, value: item.value}),
+        );
+
+        this.setState({itemsKlinik: filteredData});
+      });
+  }
+
+  getDokter(specialist) {
+    FIREBASE.database()
+      .ref('dokter')
+      .once('value')
+      .then(res => {
+        const data = res.val();
+        const filteredData = [];
+
+        data.filter(
+          item =>
+            item !== undefined &&
+            filteredData.push({
+              label: item.name,
+              value: item.value,
+              specialist: item.specialist,
+            }),
+        );
+
+        const foundDocter = filteredData.filter(
+          item => item.specialist === specialist,
+        );
+
+        this.setState({itemsDokter: foundDocter});
+      });
+  }
+
   componentDidMount() {
     this.getUserData();
+    this.getKlinik();
   }
 
   onChangeText = (namaState, value) => {
@@ -47,6 +126,7 @@ export default class Am extends Component {
     this.setState({
       ...this.state,
       namaAkun: userData?.fullName,
+      uid: userData?.uid,
     });
   };
 
@@ -66,7 +146,7 @@ export default class Am extends Component {
           photo: source,
         });
         Alert.alert(
-          'Berhasil Uploud Kartu Jaminan Asuransi/ Mitra. Silahkan melanjutkan proses pengisian form',
+          'Berhasil Uploud Kartu Jaminan Asuransi/ Mitra + KK',
         );
       })
       .catch(err => {
@@ -81,21 +161,24 @@ export default class Am extends Component {
       this.state.tanggalLahir &&
       this.state.noWa &&
       this.state.penjamin &&
-      this.state.klinik &&
-      this.state.dokter &&
+      this.state.valueKlinik &&
+      this.state.valueDokter &&
       this.state.tanggalKehadiran &&
+      this.state.jamKehadiran &&
       this.state.photoForDB
     ) {
       const amReferensi = FIREBASE.database().ref('assMit');
       const am = {
+        uid: this.state.uid,
         namaAkun: this.state.namaAkun,
         nama: this.state.nama,
         tanggalLahir: this.state.tanggalLahir,
         noWa: this.state.noWa,
         penjamin: this.state.penjamin,
-        klinik: this.state.klinik,
-        dokter: this.state.dokter,
+        klinik: this.state.valueKlinik,
+        dokter: this.state.valueDokter,
         tanggalKehadiran: this.state.tanggalKehadiran,
+        jamKehadiran: this.state.jamKehadiran,
         photo: this.state.photoForDB,
       };
 
@@ -104,7 +187,7 @@ export default class Am extends Component {
         .then(data => {
           Alert.alert(
             'Sukses',
-            'Appoitment berhasil di simpan, Our Staff `ll send you a confirmation via whatsapp',
+            'Appoitment berhasil di simpan',
           );
           this.props.navigation.replace('MainApp');
         })
@@ -117,41 +200,28 @@ export default class Am extends Component {
   };
   render() {
     console.log(this.state.photo);
+    const {
+      tanggalKehadiran,
+      jamKehadiran,
+      showBirthDate,
+      showPresentDate,
+      showPresentClock,
+      openKlinik,
+      valueKlinik,
+      itemsKlinik,
+      openDokter,
+      valueDokter,
+      itemsDokter,
+    } = this.state;
+
     return (
       <View>
-        <Gap height={40} />
-        <View
-          style={{
-            paddingHorizontal: 16,
-            backgroundColor: '#112340',
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              paddingTop: 10,
-            }}>
-            <Image
-              source={require('../../assets/logo.png')}
-              style={{
-                width: 50,
-                height: 50,
-              }}
-              resizeMode="contain"
-            />
-            <Text
-              style={{
-                color: '#FFFFFF',
-                fontSize: 20,
-                alignItems: 'center',
-                justifyContent: 'center',
-                alignText: 'center',
-                paddingRight: 40,
-              }}>
-              Appoitment Pasien Asuransi/ Mitra
-            </Text>
-          </View>
+        <View>
+          <Image
+            source={require('../../assets/headerForm2.png')}
+            style={{width: '100%', height: 124}}
+            resizeMode="contain"
+          />
         </View>
 
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -176,10 +246,18 @@ export default class Am extends Component {
               <Gap height={10} />
               <InputData
                 label="Tanggal Lahir Pasien"
-                placeholder="Masukkan Tanggal Lahir Pasien"
+                placeholder="Pilih Tanggal Lahir Pasien"
                 onChangeText={this.onChangeText}
                 value={this.state.tanggalLahir}
                 namaState="tanggalLahir"
+                RightComponent={
+                  <MaterialCommunityIcons
+                    name="calendar"
+                    size={20}
+                    color={colors.black}
+                    onPress={() => this.setState({showBirthDate: true})}
+                  />
+                }
               />
               <Gap height={10} />
               <InputData
@@ -193,7 +271,7 @@ export default class Am extends Component {
               <Gap height={10} />
               <InputData
                 label="Penjamin"
-                placeholder="Asuransi/ Mitra (Isi Nama Asuransi/ Nama Perusahaan Mitra)"
+                placeholder="Isi Nama Asuransi/ Nama Perusahaan Mitra"
                 isTextArea={true}
                 onChangeText={this.onChangeText}
                 value={this.state.penjamin}
@@ -208,35 +286,86 @@ export default class Am extends Component {
                 style={styles.tombol}
                 onPress={() => this.uploadPhoto()}>
                 <Text style={styles.textTombol}>
-                  Upload Kartu Asuransi/Mitra
+                  Upload Kartu Asuransi/Mitra + KK
                 </Text>
               </TouchableOpacity>
               <Gap height={10} />
-              <InputData
+              <Picker
+                label="Klinik Yang dituju"
+                placeholder={'Pilih Klinik'}
+                open={openKlinik}
+                value={valueKlinik}
+                items={itemsKlinik}
+                setOpen={value => this.setState({openKlinik: value})}
+                setValue={value => {
+                  this.setState({valueKlinik: value(), valueDokter: null});
+
+                  this.getDokter(value());
+                }}
+                setItems={value => console.log('items: ', value)}
+                zIndex={openKlinik ? 999 : 998}
+                placeholderColor={'gray'}
+                pickerStyle={{
+                  backgroundColor: 'transparent',
+                  borderRadius: 5,
+                }}
+              />
+              {/* <InputData
                 label="Klinik Yang di tuju"
                 placeholder="Masukkan klinik yang di tuju"
                 isTextArea={true}
                 onChangeText={this.onChangeText}
                 value={this.state.klinik}
                 namaState="klinik"
-              />
+              /> */}
               <Gap height={10} />
-              <InputData
+              {valueKlinik && (
+                <Picker
+                  label="Dokter Yang dituju"
+                  placeholder={'Pilih Dokter'}
+                  open={openDokter}
+                  value={valueDokter}
+                  items={itemsDokter}
+                  setOpen={value => this.setState({openDokter: value})}
+                  setValue={value => this.setState({valueDokter: value()})}
+                  setItems={value => console.log('items: ', value)}
+                  zIndex={openDokter ? 999 : 998}
+                  placeholderColor={'gray'}
+                  pickerStyle={{
+                    backgroundColor: 'transparent',
+                    borderRadius: 5,
+                  }}
+                />
+              )}
+
+              {/* <InputData
                 label="Dokter yang di tuju"
                 placeholder="Masukkan Dokter yang di tuju"
                 isTextArea={true}
                 onChangeText={this.onChangeText}
                 value={this.state.dokter}
                 namaState="dokter"
-              />
+              /> */}
               <Gap height={10} />
               <InputData
                 label="Tanggal & Waktu (Jam) Kehadiran"
-                placeholder="Masukkan Tanggal dan Jam kehadiran"
-                isTextArea={true}
+                placeholder="Pilih Tanggal dan Jam kehadiran"
+                // isTextArea={true}
                 onChangeText={this.onChangeText}
-                value={this.state.tanggalKehadiran}
+                value={
+                  tanggalKehadiran && jamKehadiran
+                    ? `${tanggalKehadiran}, ${jamKehadiran}`
+                    : ''
+                }
                 namaState="tanggalKehadiran"
+                RightComponent={
+                  <MaterialCommunityIcons
+                    name="calendar"
+                    size={20}
+                    color={colors.black}
+                    onPress={() => this.setState({showPresentDate: true})}
+                  />
+                }
               />
               <Gap height={10} />
               <TouchableOpacity
@@ -247,7 +376,74 @@ export default class Am extends Component {
               <Gap height={100} />
             </ScrollView>
           </View>
+          <Gap height={40} />
         </ScrollView>
+        {showBirthDate && (
+          <DateTimePicker
+            value={new Date()}
+            mode="date"
+            onChange={e => {
+              this.setState({showBirthDate: false});
+
+              if (e.type === 'set') {
+                const date = moment(e.nativeEvent.timestamp).format(
+                  'DD MMMM YYYY',
+                );
+
+                if (isInTheFuture(new Date(e.nativeEvent.timestamp)))
+                  return ToastAndroid.show(
+                    'Tanggal yang anda pilih tidak sesuai!',
+                    ToastAndroid.SHORT,
+                  );
+
+                this.setState({tanggalLahir: date});
+              }
+            }}
+          />
+        )}
+
+        {showPresentDate && (
+          <DateTimePicker
+            value={new Date()}
+            mode="date"
+            onChange={e => {
+              this.setState({showPresentDate: false});
+
+              if (e.type === 'set') {
+                const date = moment(e.nativeEvent.timestamp).format(
+                  'DD MMMM YYYY',
+                );
+
+                if (isInThePast(new Date(e.nativeEvent.timestamp)))
+                  return ToastAndroid.show(
+                    'Tanggal yang anda pilih tidak sesuai!',
+                    ToastAndroid.SHORT,
+                  );
+
+                this.setState({tanggalKehadiran: date, showPresentClock: true});
+              }
+            }}
+          />
+        )}
+
+        {showPresentClock && (
+          <DateTimePicker
+            value={new Date()}
+            mode="time"
+            onChange={e => {
+              this.setState({showPresentClock: false});
+
+              if (e.type === 'set') {
+                const currDate = new Date(e.nativeEvent.timestamp).toString();
+                const hour = currDate.split(' ')[4].split(':')[0];
+                const minute = currDate.split(' ')[4].split(':')[1];
+                const clock = `${hour}:${minute}`;
+
+                this.setState({jamKehadiran: clock});
+              }
+            }}
+          />
+        )}
       </View>
     );
   }
@@ -281,6 +477,12 @@ const styles = StyleSheet.create({
     height: 200,
     width: '100%',
     borderRadius: 8,
+  },
+  headerContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 130,
+    width: '100%',
   },
 });
 

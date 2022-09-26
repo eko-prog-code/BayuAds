@@ -106,7 +106,7 @@ const Register = ({navigation}) => {
           <Gap height={30} />
           <Button
             type="secondary"
-            title="Sudah punya Akun (MASUK)"
+            title="Sudah punya Akun [MASUK]"
             onPress={() => navigation.replace('Login')}
           />
         </ScrollView>

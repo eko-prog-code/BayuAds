@@ -16,6 +16,7 @@ import Am from './Am';
 import New from './New';
 import Filter from './Filter';
 import WebviewPage from './WebviewPage';
+import Antrian from './Antrian';
 
 export {
   Home,
@@ -36,4 +37,5 @@ export {
   New,
   Filter,
   WebviewPage,
+  Antrian,
 };

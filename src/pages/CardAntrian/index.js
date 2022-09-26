@@ -8,8 +8,10 @@ import {
   StatusBar,
   Image,
   FlatList,
+  Dimensions,
+  Linking,
 } from 'react-native';
-import {HomeProfile, Loading} from '../../components';
+import {HomeProfile, Loading, ButtonIcon} from '../../components';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import FIREBASE from '../../config/FIREBASE';
@@ -69,118 +71,176 @@ const CardAntrian = () => {
   };
 
   return (
-    <LinearGradient
-      start={{x: 0, y: 0}}
-      end={{x: 1, y: 0}}
-      style={{borderRadius: 15, marginTop: 10}}
-      colors={['#DFF5FE', '#DFF5FE', '#DFF5FE']}>
-      {loading && <Loading />}
-      <View
-        style={{
-          padding: 10,
-          borderRadius: 15,
-        }}>
-        <HomeProfile />
-        <Text style={{color: '#000000'}}>Nomor Antrian Appoitment:</Text>
-        <Text
-          style={{
-            color: '#000000',
-            fontSize: 14,
-            marginTop: 4,
-          }}>
-          {userHomeData !== null ? userHomeData.appo1 : 0}
-        </Text>
-        <Text
-          style={{
-            color: '#000000',
-            fontSize: 14,
-            marginTop: 4,
-          }}>
-          {userHomeData !== null ? userHomeData.appo2 : 0}
-        </Text>
-        <Text
-          style={{
-            color: '#000000',
-            fontSize: 14,
-            marginTop: 4,
-          }}>
-          {userHomeData !== null ? userHomeData.appo3 : 0}
-        </Text>
-        <Text
-          style={{
-            color: '#000000',
-            fontSize: 14,
-            marginTop: 4,
-          }}>
-          {userHomeData !== null ? userHomeData.appo4 : 0}
-        </Text>
-        <View style={{flexDirection: 'row'}}>
-          <View style={{marginTop: 4}}>
-            <Text style={{color: '#1908DD', fontStyle: 'italic', fontSize: 12}}>
-            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-              <Image
-                source={require('../../assets/user.png')}
-                style={styles.user}
-                resizeMode={'contain'}
-              />
-              <Text style={styles.member}>Akun</Text>
-            </TouchableOpacity>
-            </Text>
-          </View>
+    <View style={styles.container}>
+          <View style={styles.WrapperFiturUtama}>
 
-          <View
-            style={{
-              justifyContent: 'flex-end',
-              alignItems: 'flex-end',
-              flex: 1,
-            }}>
+            <View style={styles.group}>
+            <TouchableOpacity onPress={() => navigation.navigate('Jadwal')}>
+            <HomeProfile style={styles.imagefiturUtama} numberOfLines={1}/>
+
+            </TouchableOpacity>
+            </View>
+
+            <View style={styles.group}>
+            <TouchableOpacity onPress={() => navigation.navigate('Jadwal')}>
+            <Image style={styles.imagefiturUtama} source={require('../../assets/jadwalDok.png')}/>
+            <Text style={styles.textfiturUtama}>Jadwal Dokter</Text>
+            </TouchableOpacity>
+            </View>
+
+            <View style={styles.group}>
             <TouchableOpacity onPress={() => navigation.navigate('Filter')}>
-          <Image
-            source={require('../../assets/Appo.png')}
-            style={styles.chat}
-            resizeMode={'contain'}
-          />
-          <Text style={styles.keluar}>Daftar Klinik</Text>
-        </TouchableOpacity>
-          </View>
+            <Image style={styles.imagefiturUtama} source={require('../../assets/daftarOnline.png')}/>
+            <Text style={styles.textfiturUtama}>Daftar Online</Text>
+            </TouchableOpacity>
+            </View>
+
+            <View style={styles.group}>
+            <TouchableOpacity onPress={() => navigation.navigate('Antrian')}>
+            <Image style={styles.imagefiturUtama} source={require('../../assets/antrianIcon.png')}/>
+            <Text style={styles.textfiturUtama}>Antrian</Text>
+            </TouchableOpacity>
+            </View>
+
+
+
+
+            <View style={styles.group}>
+            <TouchableOpacity>
+            <Image style={styles.imagefiturUtama} source={require('../../assets/infoRs.png')}/>
+            <Text style={styles.textfiturUtama}>Informasi RS</Text>
+            </TouchableOpacity>
+            </View>
+
+            <View style={styles.group}>
+            <TouchableOpacity onPress={() => Linking.openURL('https://wa.me/+628111987676')}>
+            <Image style={styles.imagefiturUtama} source={require('../../assets/LayananPengaduan.png')}/>
+            <Text style={styles.textfiturUtama} numberOfLines={1}>Layanan Pengaduan</Text>
+            </TouchableOpacity>
+            </View>
+
+            <View style={styles.group}>
+            <TouchableOpacity onPress={() => Linking.openURL('https://wa.me/+628111120775')}>
+            <Image style={styles.imagefiturUtama} source={require('../../assets/chatSehat2.png')}/>
+            <Text style={styles.textfiturUtama}>Chat Sehat</Text>
+            </TouchableOpacity>
+            </View>
+
+            <View style={styles.group}>
+            <TouchableOpacity onPress={() => Linking.openURL('https://wa.me/+628111199968')}>
+            <Image style={styles.imagefiturUtama} source={require('../../assets/InfoCenterr.png')}/>
+            <Text style={styles.textfiturUtama} numberOfLines={1}>Information Center</Text>
+            </TouchableOpacity>
+            </View>
         </View>
-      </View>
-    </LinearGradient>
+    </View>
   );
 };
 
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
-  user: {
-    height: 70,
-    width: 70,
-    // width: Dimensions.get('screen').width - 40,
-    marginBottom: 2,
-    alignItems: "center"
-    // paddingLeft: 200,
-  },
-  rowCenter: {
+  container: {
+    backgroundColor: 'white',
+    height: 220,
+    padding: 6,
+    marginHorizontal: 20,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
+    marginTop: -windowHeight * 0.008,
     flexDirection: 'row',
+  },
+  WrapperFiturUtama: {
+    flexDirection: 'row',
+    flex: 1,
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    marginTop: 5,
+    paddingRight: 7,
+    justifyContent: 'center',
     alignItems: 'center',
+  },
+  group: {
+    alignItem: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+    marginLeft: 10,
+    width: 64,
+  },
+  textfiturUtama: {
+    marginTop: 4,
+    fontSize: 10, 
+    textAlign: 'center',
     justifyContent: 'center',
   },
-  member: {
-    color: '#000000',
-    fontWeight: 'bold',
-    textAlign: 'center',
+  imagefiturUtama: {
+    width: 60,
+    height: 60,
+    marginTop: 12,
+    alignItem: 'center',
+    justifyContent: 'center',
+  },
+  labelSaldo: {
+    fontSize: 20,
+    fontFamily: 'TitilliumWeb-Regular',
+  },
+  valueSaldo: {
+    fontSize: 20,
+    fontFamily: 'TitilliumWeb-Bold',
+  },
+  labelPoint: {
+    fontSize: 12,
+    fontFamily: 'TitilliumWeb-Regular',
+    flexDirection: 'row',
+  },
+  valuePoint: {
+    fontSize: 12,
+    fontFamily: 'TitilliumWeb-Bold',
+    color: "#000000",
+  },
+  buttonAksi: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
   chat: {
-    width: 70,
-    height: 72,
-    resizeMode: 'contain',
-    marginBottom: 2,
-    borderRadius: 20,
+    width: 60,
+    height: 60,
   },
   keluar: {
-    textAlign: 'center',
-    color: '#000000',
-    fontWeight: 'bold',
+    color: "#000000",
+    textAlign: "center",
+    fontSize: 12,
+  },
+  layanan: {
+    paddingLeft: 30,
+    paddingTop: 15,
+  },
+  label: {
+    fontFamily: 'TitilliumWeb-Bold',
+  },
+  iconLayanan: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 2,
+    flexWrap: 'wrap',
+  },
+  pesananAktif: {
+    paddingTop: 10,
+    paddingHorizontal: 30,
+    flex: 1,
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
   },
 });
-
 
 export default CardAntrian;

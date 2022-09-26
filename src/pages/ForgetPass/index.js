@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View, Alert} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {Button, Gap, Input, Link} from '../../components';
 import FIREBASE from '../../config/FIREBASE';
@@ -14,7 +14,7 @@ const ForgetPass = ({navigation}) => {
     auth
       .sendPasswordResetEmail(email)
       .then((res) => {
-        showSuccess('Reset Password sudah terkirim ke Email Anda');
+        Alert.alert('Reset Password terkirim ke Inbox Email / Spam Email Anda');
         navigation.replace('Login');
       })
       .catch((err) => {

@@ -9,7 +9,6 @@ import {
   Image,
 } from 'react-native';
 import Info from '../Info';
-import CardAntrian from '../CardAntrian';
 import {FloatingIcon, Gap, Input} from '../../components';
 import FIREBASE from '../../config/FIREBASE';
 
@@ -60,49 +59,11 @@ const Informasi = ({navigation}) => {
         onScrollEndDrag={() => setShowFloating(true)}
         showsVerticalScrollIndicator={false}>
         <View style={styles.page}>
-          <Gap height={40} />
-          <Input
-            label="Cari dokter/klinik"
-            value={searchVal}
-            onChangeText={val => {
-              setSearchVal(val);
-              handleSearch(val);
-            }}
-          />
-          <Gap height={16} />
-          <ScrollView
-            contentContainerStyle={{alignItems: 'flex-start'}}
-            horizontal>
-            {newAppointment.map((item, key) => (
-              <View key={key} style={styles.cardAppointment}>
-                <Image
-                  source={{uri: item?.image}}
-                  style={styles.imageAppointment}
-                />
-                <Gap width={16} />
-                <View style={{flex: 1}}>
-                  <Text style={{fontWeight: 'bold'}}>{item?.title}</Text>
-                  <Text style={styles.scheduleText}>{item?.senin}</Text>
-                  <Text style={styles.scheduleText}>{item?.selasa}</Text>
-                  <Text style={styles.scheduleText}>{item?.rabu}</Text>
-                  <Text style={styles.scheduleText}>{item?.kamis}</Text>
-                  <Text style={styles.scheduleText}>{item?.jumat}</Text>
-                </View>
-              </View>
-            ))}
-          </ScrollView>
-          <CardAntrian />
-          <Gap height={20} />
+          <Gap height={30} />
           <Text style={styles.news}>Bayukarta TeleVision Channel</Text>
           <Info />
         </View>
       </ScrollView>
-      <FloatingIcon
-          onClose={() => setShowFloating(false)}
-          onPress={() => navigation.navigate('New')}
-          visible={showFloating}
-          imageUri={floatingIconUrl}
-        />
     </View>
   );
 };
@@ -127,6 +88,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: '#35C872',
+    textAlign: "center"
   },
   imageAppointment: {
     height: 80,

@@ -12,3 +12,23 @@ export const setDateChat = oldDate => {
 
   return `${year}-${month}-${date}`;
 };
+
+export const isInThePast = date => {
+  const today = new Date();
+
+  today.setHours(0, 0, 0, 0);
+
+  today.setDate(today.getDate());
+
+  return date < today;
+};
+
+export const isInTheFuture = date => {
+  const today = new Date();
+
+  today.setHours(0, 0, 0, 0);
+
+  today.setDate(today.getDate() + 1);
+
+  return date > today;
+};

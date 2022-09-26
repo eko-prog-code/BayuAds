@@ -1,5 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, View,  TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ImageBackground,
+} from 'react-native';
 import TabItem from '../TabItem';
 
 const BottomTabNavigator = ({state, descriptors, navigation}) => {
@@ -10,7 +16,10 @@ const BottomTabNavigator = ({state, descriptors, navigation}) => {
   }
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={require('../../../assets/bottomBackground.png')}
+      imageStyle={{borderRadius: 40}}
+      style={styles.container}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
         const label =
@@ -42,34 +51,35 @@ const BottomTabNavigator = ({state, descriptors, navigation}) => {
         };
 
         return (
-         <TabItem
-         key={index}
-         isFocused={isFocused}
-         label={label}
-         onLongPress={onLongPress}
-         onPress={onPress} />
+          <TabItem
+            key={index}
+            isFocused={isFocused}
+            label={label}
+            onLongPress={onLongPress}
+            onPress={onPress}
+          />
         );
       })}
-    </View>
+    </ImageBackground>
   );
 };
 
 export default BottomTabNavigator;
 
 const styles = StyleSheet.create({
-    container:{
-        flexDirection: 'row',
-        backgroundColor: '#DFF5FE',
-        justifyContent: 'space-between',
-        paddingVertical: 16,
-        paddingHorizontal: 30,
-        borderRadius: 40,
-        marginVertical: 20,
-        marginHorizontal: 8,
-        marginVertical: 8,
-        position: 'absolute',
-        elevation: 0,
-        bottom: 0,
-        marginBottom: 10,
-    }
+  container: {
+    flexDirection: 'row',
+    backgroundColor: '#DFF5FE',
+    justifyContent: 'space-between',
+    paddingVertical: 16,
+    paddingHorizontal: 30,
+    borderRadius: 40,
+    marginVertical: 20,
+    marginHorizontal: 8,
+    marginVertical: 8,
+    position: 'absolute',
+    elevation: 0,
+    bottom: 0,
+    marginBottom: 10,
+  },
 });

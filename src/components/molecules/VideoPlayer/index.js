@@ -34,17 +34,16 @@ const VideoPlayer = ({link, visible, onClose}) => {
       <View style={styles.container}>
         <YoutubePlayer
           height={Dimensions.get('screen').height / 4}
-          play={playing}
+          play={true}
           videoId={link}
           onChangeState={onStateChange}
         />
         <TouchableOpacity
           title={playing ? 'Jeda' : 'Putar Video'}
-          onPress={togglePlaying}
-          style={styles.btnPlay}>
-          <Text style={styles.btnPlayText}>Putar</Text>
+          onPress={togglePlaying}>
         </TouchableOpacity>
 
+        <View style={styles.btnCenter}>
         <TouchableOpacity
           onPress={() => {
             setPlaying(false);
@@ -56,6 +55,7 @@ const VideoPlayer = ({link, visible, onClose}) => {
           style={styles.btnClose}>
           <Text style={styles.btnCloseText}>Tutup</Text>
         </TouchableOpacity>
+        </View>
       </View>
     </Modal>
   );
@@ -75,12 +75,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   btnClose: {
-    height: 42,
-    borderRadius: 10,
-    backgroundColor: '#FF0000',
+    height: 30,
+    borderRadius: 40,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 8,
+    width: "40%",
+  },
+  btnCenter: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   btnPlay: {
     height: 42,
@@ -91,7 +96,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   btnCloseText: {
-    fontSize: 18,
+    fontSize: 12,
     textAlign: 'center',
     color: '#FFFFFF',
   },

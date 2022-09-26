@@ -25,6 +25,10 @@ const styles = StyleSheet.create({
     right: 0,
     zIndex: 1100,
     elevation: 4,
+    backgroundColor: "#000000",
+    height: 20,
+    width: 20,
+    borderRadius: 80,
   },
 });
 

@@ -97,56 +97,7 @@ const Obat = ({navigation}) => {
           <RefreshControl refreshing={refreshing} onRefresh={getData} />
         }>
         <Gap height={40} />
-        <TextKlinik />
-        <Text style={styles.title}>Monitoring Antrian Dokter</Text>
-        <Text style={styles.penjamin}>(Pasien UMUM, Mitra & Asuransi)</Text>
-        <Text style={styles.date}>
-          Waktu Anda Berharga {tanggal.format('LLLL, a')}
-        </Text>
-        <View>
-          <SafeAreaView style={{flex: 1}}>
-            <View style={{padding: 20, paddingTop: 8}}>
-              <Input
-                onChangeText={val => handleFilter(val)}
-                label="Cari Klinik"
-                placeholder="Masukkan Klinik"
-              />
-            </View>
-            {loading ? (
-              <ActivityIndicator size={24} color={colors.primary} />
-            ) : (
-              <FlatList
-                keyExtractor={(_, index) => index.toString()}
-                data={data}
-                contentContainerStyle={styles.listContentContainer}
-                renderItem={({item}) => (
-                  <TouchableOpacity
-                    onPress={() => openKlinik(item.link)}
-                    key={item.id}>
-                    <Image
-                      source={{uri: item?.image}}
-                      style={styles.thumbnail}
-                    />
-                    <Gap height={8} />
-                    <View>
-                      <Text style={styles.subtitle}>{item?.title}</Text>
-                      <Gap height={4} />
-                      <Text
-                        numberOfLines={2}
-                        lineBreakMode="tail"
-                        style={styles.subtitle}>
-                        No Sedang diLayani= {item?.body}
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-                )}
-                numColumns={2}
-                columnWrapperStyle={styles.columnWrapperStyle}
-              />
-            )}
-          </SafeAreaView>
-        </View>
-        <Gap height={20} />
+      
         <Gambar />
       </ScrollView>
     </View>

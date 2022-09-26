@@ -10,11 +10,9 @@ import {
 } from 'react-native';
 import FIREBASE from '../../config/FIREBASE';
 import {HeadlineItem} from '../../components';
-import {useNavigation} from '@react-navigation/native';
 
 const Headline = () => {
   const [headline, setHeadline] = useState([]);
-  const navigation = useNavigation();
 
 
   useEffect(() => {
@@ -32,7 +30,7 @@ const Headline = () => {
   }, []);
 
   const openHeadline = url => {
-    navigation.navigate('WebviewPage', {link: 'https://' + url});
+    Linking.openURL('https://' + url);
   };
 
   return (

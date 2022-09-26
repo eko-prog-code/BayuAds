@@ -60,10 +60,20 @@ const JadwalCard = ({item, type, onRemove, onPress, uid, jadwal, onAdd}) => {
           style={{
             fontSize: 16,
             fontWeight: 'bold',
-            color: '#2d3436',
+            color: '#01A2EA',
             marginTop: 8,
           }}>
           {name}
+        </Text>
+        <Text
+          numberOfLines={2}
+          ellipsizeMode={'tail'}
+          style={{
+            fontWeight: 'bold',
+            fontSize: 16,
+            color: '#01A2EA'
+          }}>
+          {item?.klinik}
         </Text>
         <Text
           numberOfLines={2}

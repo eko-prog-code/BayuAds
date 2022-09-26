@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
   },
   slider: {
     height: Dimensions.get('screen').height / 4,
-    width: Dimensions.get('screen').width,
+    width: Dimensions.get('screen').width /1.05,
+    borderRadius: 20,
     //width: responsiveWidth(420),
   },
   dotStyle: {

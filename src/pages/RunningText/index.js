@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#DFF5FE',
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 14,
+    marginTop: 8,
   },
   runningTextLogo: {
     height: 44,

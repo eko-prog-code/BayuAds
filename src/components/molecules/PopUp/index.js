@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  StatusBar,
 } from 'react-native';
 import FIREBASE from '../../../config/FIREBASE';
 import {useDispatch} from 'react-redux';
@@ -31,6 +32,7 @@ const PopUp = ({visible, onClose}) => {
 
   return (
     <Modal animationType="fade" visible={visible} transparent>
+     <StatusBar barStyle="dark-content" backgroundColor={'rgba(0,0,0,0.5)'} hidden={false} />
       <View style={styles.container}>
         <View style={{alignItems: 'center'}}>
         <TouchableOpacity

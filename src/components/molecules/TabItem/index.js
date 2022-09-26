@@ -45,8 +45,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     text: {
-        color: '#36364A',
-     
+        color: '#2447F9',
+        fontSize: 13,
+     fontWeight: 'bold',
         marginLeft: 8,
     }
 });

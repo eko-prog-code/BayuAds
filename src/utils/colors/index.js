@@ -1,5 +1,5 @@
 const mainColors = {
-  green1: '#0BCAD4',
+  green1: '#01A2EA',
   green2: '#EDFCFD',
   dark1: '#112340',
   dark2: '#495A75',
@@ -17,8 +17,8 @@ const mainColors = {
 };
 
 export const colors = {
-  WARNA_UTAMA: 'putih',
-  WARNA_SEKUNDER: 'hitam',
+  WARNA_UTAMA: 'white',
+  WARNA_SEKUNDER: 'black',
   primary: mainColors.green1,
   secondary: mainColors.dark1,
   tertiary: mainColors.blue1,

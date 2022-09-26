@@ -1,12 +1,13 @@
 import React, {Component, useCallback, useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import FIREBASE from '../../config/FIREBASE';
-import {BannerSlider} from '../../components';
+import {BannerSlider, Loading} from '../../components';
 import {useDispatch} from 'react-redux';
 
 const Carousel = props => {
   const [banners, setBanners] = useState([]);
   const [links, setLinks] = useState([]);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {

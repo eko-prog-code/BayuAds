@@ -19,6 +19,7 @@ import {
   New,
   Filter,
   WebviewPage,
+  Antrian,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomTabNavigator} from '../components';
@@ -110,6 +111,11 @@ const Router = () => {
        <Stack.Screen
         name="Filter"
         component={Filter}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Antrian"
+        component={Antrian}
         options={{headerShown: false}}
       />
       <Stack.Screen name="Am" component={Am} options={{headerShown: false}} />
